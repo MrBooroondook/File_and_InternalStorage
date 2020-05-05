@@ -32,7 +32,16 @@ public class MainFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
+        // path: /data/data/<package>/files/<file_name>
         file = new File(Objects.requireNonNull(getContext()).getFilesDir(), FILE_NAME);
+
+        // ***** WRITE_EXTERNAL_STORAGE *****
+        // Начиная с уровня API19, это разрешение не требуется для чтения/записи файлов в каталогах
+        // вашего приложения, возвращаемых Context.getExternalFilesDir(String)
+        // и Context.getExternalCacheDir().
+        // path: /sdcard/Android/data/<package>/files/<file_name>
+        // file = new File(Objects.requireNonNull(getContext()).getExternalFilesDir(null), FILE_NAME);
     }
 
     @Nullable
